@@ -146,15 +146,9 @@
                                 </div>
                                 <div class="time-item mt-3">
                                     <div class="item-info">
-                                        <div class="font-14">2022 - Now</div>
+                                        <div class="font-14">2022 - 2023</div>
                                         <h5 class="my-1 text-dark">DevOps Engineer</h5>
                                         <a href="https://finopia.net">Finopa co.</a></div>
-                                </div>
-                                <div class="time-item mt-3">
-                                    <div class="item-info">
-                                        <div class="font-14">2022 - Now</div>
-                                        <h5 class="my-1 text-dark">DevOps Engineer</h5>
-                                        <a href="https://linan.net">Linan agancy co.</a></div>
                                 </div>
                                 <div class="time-item mt-3">
                                     <div class="item-info">
@@ -232,8 +226,8 @@
                                                                                                    name="message"
                                                                                                    rows="4"></textarea>
                                 </div><!--end col-->
-                                <div class="form-group col-md-12"><input class="btn btn-primary px-5 py-2" id="submit" name="submit"
-                                                                         type="submit" value="Submit now">
+                                <div class="form-group col-md-12"><button class="btn btn-primary px-5 py-2" id="submit" name="submit"
+                                                                          type="submit" value="Send Message">Send Message</button>
                                     <div id="simple-msg"></div>
                                 </div><!--end col--></div><!--end row--></form><!--end form--></div>
                     <!--end contact-form--></div><!--end col--></div><!--end row--></div><!--end container--></section>
@@ -267,12 +261,18 @@
          $('#contact-arian').submit(function (e) {
               e.preventDefault();
                 $.ajax({
-                     url: 'https://api.telegram.org/bot5527255127:AAGwC8kttm9qMJYFyZMNxUpfebqPU56P_To/sendMessage?chat_id=-1001693072771&text=Name: '+$('#name').val()+'\n    Email: '+$('#email').val()+'\n    Message: '+$('#comments').val(),
+                     url: 'https://api.telegram.org/bot6007548503:AAEYXtzBPWtji9RYU87XIqLoxWw0FHJ8_v8/sendMessage?chat_id=@aerbir_ir&text=Name: '+$('#name').val()+'\n    Email: '+$('#email').val()+'\n    Message: '+$('#comments').val(),
                      type: 'GET',
                      data: $(this).serialize(),
                      success: function (data) {
-                            $('#message').html(data);
-                     }
+                         alert("Your message has been sent")
+                         $('#contact-arian')[0].reset();
+                         $('#submit').text("Sent successfully").disable()
+                     },
+                    error: function (e) {
+                         alert(`Problem at sending message -> ${e.responseJSON.description}`)
+                        $('#submit').text("Retry")
+                    }
                 });
          });
     });
